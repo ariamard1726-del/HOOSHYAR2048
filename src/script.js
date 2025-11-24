@@ -143,3 +143,15 @@ app.get("/leaderboard", (req, res) => {
 });
 
 app.listen(3000, () => console.log("Server running on port 3000"));
+function sendResult(username, score, coins) {
+  fetch("http://localhost:3000/submit", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ username, score, coins })
+  })
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById("leaderboard").innerHTML =
+      JSON.stringify(data.leaderboard, null, 2);
+  });
+}
