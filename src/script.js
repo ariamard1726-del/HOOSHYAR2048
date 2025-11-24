@@ -1,108 +1,49 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const size = 4;
-  const grid = document.querySelectorAll(".grid-cell");
+body {
+  font-family: "Tahoma", sans-serif;
+  text-align: center;
+  background-color: #faf8ef;
+  color: #776e65;
+}
 
-  // تبدیل گرید به آرایه
-  function getGrid() {
-    let arr = [];
-    for (let i = 0; i < size; i++) {
-      arr[i] = [];
-      for (let j = 0; j < size; j++) {
-        let cell = grid[i * size + j];
-        arr[i][j] = cell.textContent === "" ? 0 : parseInt(cell.textContent);
-      }
-    }
-    return arr;
-  }
+h1 {
+  font-size: 32px;
+  margin: 20px 0;
+  color: #333;
+}
 
-  function setGrid(arr) {
-    for (let i = 0; i < size; i++) {
-      for (let j = 0; j < size; j++) {
-        let cell = grid[i * size + j];
-        cell.textContent = arr[i][j] === 0 ? "" : arr[i][j];
-      }
-    }
-  }
+#grid-container {
+  width: 320px;
+  height: 320px;
+  margin: 20px auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 10px;
+  background-color: #bbada0;
+  padding: 10px;
+  border-radius: 10px;
+}
 
-  // اضافه کردن عدد جدید
-  function addNumber(arr) {
-    let empty = [];
-    for (let i = 0; i < size; i++) {
-      for (let j = 0; j < size; j++) {
-        if (arr[i][j] === 0) empty.push([i, j]);
-      }
-    }
-    if (empty.length > 0) {
-      let [x, y] = empty[Math.floor(Math.random() * empty.length)];
-      arr[x][y] = Math.random() < 0.9 ? 2 : 4;
-    }
-  }
+.grid-cell {
+  background-color: #cdc1b4;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #776e65;
+}
 
-  // حرکت و ترکیب
-  function slide(row) {
-    row = row.filter(val => val); // حذف صفرها
-    for (let i = 0; i < row.length - 1; i++) {
-      if (row[i] === row[i + 1]) {
-        row[i] *= 2;
-        row[i + 1] = 0;
-      }
-    }
-    row = row.filter(val => val);
-    while (row.length < size) {
-      row.push(0);
-    }
-    return row;
-  }
-
-  function moveLeft(arr) {
-    for (let i = 0; i < size; i++) {
-      arr[i] = slide(arr[i]);
-    }
-    return arr;
-  }
-
-  function moveRight(arr) {
-    for (let i = 0; i < size; i++) {
-      arr[i] = slide(arr[i].reverse()).reverse();
-    }
-    return arr;
-  }
-
-  function moveUp(arr) {
-    for (let j = 0; j < size; j++) {
-      let col = [];
-      for (let i = 0; i < size; i++) col.push(arr[i][j]);
-      col = slide(col);
-      for (let i = 0; i < size; i++) arr[i][j] = col[i];
-    }
-    return arr;
-  }
-
-  function moveDown(arr) {
-    for (let j = 0; j < size; j++) {
-      let col = [];
-      for (let i = 0; i < size; i++) col.push(arr[i][j]);
-      col = slide(col.reverse()).reverse();
-      for (let i = 0; i < size; i++) arr[i][j] = col[i];
-    }
-    return arr;
-  }
-
-  // شروع بازی
-  let arr = getGrid();
-  addNumber(arr);
-  addNumber(arr);
-  setGrid(arr);
-
-  document.addEventListener("keydown", (e) => {
-    let old = JSON.stringify(arr);
-    if (e.key === "ArrowLeft") arr = moveLeft(arr);
-    if (e.key === "ArrowRight") arr = moveRight(arr);
-    if (e.key === "ArrowUp") arr = moveUp(arr);
-    if (e.key === "ArrowDown") arr = moveDown(arr);
-    if (JSON.stringify(arr) !== old) {
-      addNumber(arr);
-      setGrid(arr);
-    }
-  });
-});
+/* رنگ‌های مخصوص کاشی‌ها */
+.grid-cell[data-value="2"] { background-color: #eee4da; color: #776e65; }
+.grid-cell[data-value="4"] { background-color: #ede0c8; color: #776e65; }
+.grid-cell[data-value="8"] { background-color: #f2b179; color: #f9f6f2; }
+.grid-cell[data-value="16"] { background-color: #f59563; color: #f9f6f2; }
+.grid-cell[data-value="32"] { background-color: #f67c5f; color: #f9f6f2; }
+.grid-cell[data-value="64"] { background-color: #f65e3b; color: #f9f6f2; }
+.grid-cell[data-value="128"] { background-color: #edcf72; color: #f9f6f2; }
+.grid-cell[data-value="256"] { background-color: #edcc61; color: #f9f6f2; }
+.grid-cell[data-value="512"] { background-color: #edc850; color: #f9f6f2; }
+.grid-cell[data-value="1024"] { background-color: #edc53f; color: #f9f6f2; }
+.grid-cell[data-value="2048"] { background-color: #edc22e; color: #f9f6f2; }
