@@ -93,3 +93,19 @@ h1 {
   color: #00695c;
   font-weight: bold;
 }
+#online-btn {
+  margin-top: 15px;
+  padding: 10px 20px;
+  font-size: 18px;
+  background-color: #00695c;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#leaderboard {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #333;
+}
