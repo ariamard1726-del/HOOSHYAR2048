@@ -174,3 +174,19 @@ app.post("/submit", async (req, res) => {
   const result = await pool.query("SELECT * FROM leaderboard ORDER BY score DESC LIMIT 10");
   res.json(result.rows);
 });
+// اتصال به کتابخانه‌ها
+const express = require("express");
+const { Pool } = require("pg");
+
+// تنظیمات سرور
+const app = express();
+app.use(express.json());
+
+// اتصال به دیتابیس PostgreSQL
+const pool = new Pool({
+  user: "postgres",
+  host: "localhost",
+  database: "hooshyar2048",
+  password: "yourpassword",
+  port: 5432,
+});
