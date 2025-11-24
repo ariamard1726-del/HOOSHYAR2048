@@ -96,3 +96,9 @@ function setGrid(arr) {
     }
   }
 }
+let coins = 0;
+
+function updateCoins(amount) {
+  coins += amount;
+  document.getElementById("coins").textContent = coins;
+}
