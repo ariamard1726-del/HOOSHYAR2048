@@ -125,3 +125,21 @@ document.getElementById("online-btn").addEventListener("click", () => {
     document.getElementById("message").textContent = "❌ سکه کافی ندارید!";
   }
 });
+const express = require("express");
+const app = express();
+app.use(express.json());
+
+let leaderboard = [];
+
+app.post("/submit", (req, res) => {
+  const { username, score, coins } = req.body;
+  leaderboard.push({ username, score, coins });
+  leaderboard.sort((a, b) => b.score - a.score);
+  res.json({ message: "امتیاز ثبت شد", leaderboard });
+});
+
+app.get("/leaderboard", (req, res) => {
+  res.json(leaderboard);
+});
+
+app.listen(3000, () => console.log("Server running on port 3000"));
