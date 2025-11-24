@@ -108,3 +108,20 @@ if (row[i] === row[i + 1]) {
   updateCoins(1);      // هر ترکیب یک سکه
   row[i + 1] = 0;
 }
+document.getElementById("online-btn").addEventListener("click", () => {
+  if (coins >= 10) {
+    coins -= 10;
+    document.getElementById("coins").textContent = coins;
+    document.getElementById("message").textContent = "✅ وارد مسابقه آنلاین شدید!";
+    
+    // شبیه‌سازی ارسال امتیاز به سرور
+    setTimeout(() => {
+      document.getElementById("leaderboard").innerHTML = `
+        <p>رتبه شما: 5</p>
+        <p>امتیاز برتر: 10240</p>
+      `;
+    }, 2000);
+  } else {
+    document.getElementById("message").textContent = "❌ سکه کافی ندارید!";
+  }
+});
