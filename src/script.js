@@ -53,3 +53,27 @@ function updateScore(points) {
   score += points;
   document.getElementById("score").textContent = score;
 }
+
+function checkWin(arr) {
+  for (let i = 0; i < size; i++) {
+    for (let j = 0; j < size; j++) {
+      if (arr[i][j] === 2048) {
+        document.getElementById("message").textContent = "🎉 تبریک! شما برنده شدید!";
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+function checkGameOver(arr) {
+  for (let i = 0; i < size; i++) {
+    for (let j = 0; j < size; j++) {
+      if (arr[i][j] === 0) return false;
+      if (j < size - 1 && arr[i][j] === arr[i][j + 1]) return false;
+      if (i < size - 1 && arr[i][j] === arr[i + 1][j]) return false;
+    }
+  }
+  document.getElementById("message").textContent = "❌ بازی تمام شد!";
+  return true;
+}
