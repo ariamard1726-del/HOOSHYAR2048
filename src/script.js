@@ -155,3 +155,22 @@ function sendResult(username, score, coins) {
       JSON.stringify(data.leaderboard, null, 2);
   });
 }
+const { Pool } = require("pg");
+const pool = new Pool({
+  user: "postgres",
+  host: "localhost",
+  database: "hooshyar2048",
+  password: "yourpassword",
+  port: 5432,
+});
+
+// ذخیره امتیاز
+app.post("/submit", async (req, res) => {
+  const { username, score, coins } = req.body;
+  await pool.query(
+    "INSERT INTO leaderboard (username, score, coins) VALUES ($1, $2, $3)",
+    [username, score, coins]
+  );
+  const result = await pool.query("SELECT * FROM leaderboard ORDER BY score DESC LIMIT 10");
+  res.json(result.rows);
+});
