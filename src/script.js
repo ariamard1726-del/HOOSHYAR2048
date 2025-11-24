@@ -1,0 +1,1 @@
+console.log("شروع بازی HOOSHYAR 2048");
