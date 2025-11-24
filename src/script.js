@@ -102,3 +102,9 @@ function updateCoins(amount) {
   coins += amount;
   document.getElementById("coins").textContent = coins;
 }
+if (row[i] === row[i + 1]) {
+  row[i] *= 2;
+  updateScore(row[i]); // امتیاز
+  updateCoins(1);      // هر ترکیب یک سکه
+  row[i + 1] = 0;
+}
