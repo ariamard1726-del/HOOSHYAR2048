@@ -47,3 +47,9 @@ h1 {
 .grid-cell[data-value="512"] { background-color: #edc850; color: #f9f6f2; }
 .grid-cell[data-value="1024"] { background-color: #edc53f; color: #f9f6f2; }
 .grid-cell[data-value="2048"] { background-color: #edc22e; color: #f9f6f2; }
+let score = 0;
+
+function updateScore(points) {
+  score += points;
+  document.getElementById("score").textContent = score;
+}
