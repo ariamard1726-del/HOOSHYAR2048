@@ -77,3 +77,22 @@ function checkGameOver(arr) {
   document.getElementById("message").textContent = "❌ بازی تمام شد!";
   return true;
 }
+
+function setGrid(arr) {
+  for (let i = 0; i < size; i++) {
+    for (let j = 0; j < size; j++) {
+      let cell = grid[i * size + j];
+      if (arr[i][j] === 0) {
+        cell.textContent = "";
+        cell.removeAttribute("data-value");
+      } else {
+        cell.textContent = arr[i][j];
+        cell.setAttribute("data-value", arr[i][j]);
+
+        // انیمیشن ظاهر شدن
+        cell.classList.add("new");
+        setTimeout(() => cell.classList.remove("new"), 200);
+      }
+    }
+  }
+}
