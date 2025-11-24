@@ -84,3 +84,6 @@ h1 {
 .grid-cell {
   transition: all 0.2s ease-in-out;
 }
+.grid-cell.new {
+  transform: scale(1.2);
+}
